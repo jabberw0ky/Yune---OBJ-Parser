@@ -2,7 +2,7 @@
 
 This is a sub-repository for Yune's parser, maintained in order to be seperately able to provide updates.
 
-Use Yune-OBJ-Parser to convert .OBJ files to .rtt format which is supported by the Yune Renderer. Some requirements for the parser to succesfully convert the files are:
+Use Yune-OBJ-Parser to convert .OBJ files to .rtt format which is supported by the Yune Renderer. Requirements for the parser to succesfully convert the files are:
 
 * Make sure the files are in .OBJ format.
 * Grouping must be on.
