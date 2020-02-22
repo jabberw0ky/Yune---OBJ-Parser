@@ -42,10 +42,10 @@ std::vector < glm::vec3 > nNormals;
 std::vector <int> vert_indx;
 std::vector <int> norm_indx;
 std::vector <int> groups;
-//std::vector <int> gCount;
-//std::vector <char> tagID;
+std::vector <string> meshIDs;
 
 int faceCount = 0;
+string description;
 
 bool importer ( const char *fname )
 {
@@ -64,10 +64,22 @@ bool importer ( const char *fname )
     string dataType;
     inFile >> dataType;
 
+        if ( dataType == "#" )
+        {
+            getline(inFile,description);
+        }
+
          if ( (dataType == "o") || (dataType == "g" ) )
      {
+        string meshName = "";
+        getline(inFile,meshName);
+
+        if(meshName != " default")
+        {
+            meshIDs.push_back(meshName);
+        }
+
         groups.push_back(faceCount);
-        //tagID.push_back('o');
         tagEmpty = false;
 
      }
@@ -102,7 +114,6 @@ if ( dataType.substr(0,1) == "f" )
 if (tagEmpty == true)
     {
         groups.push_back(faceCount);
-        //tagID.push_back('o');
         tagEmpty = false;
     }
 
@@ -172,15 +183,17 @@ yuneFile.open(fname);
 
 int j = 0;
 int i = 0;
+int m = 0;
+
+yuneFile << "#" << description << endl << endl;
 
 for( int k = 0 ; k < faceCount ; k++ )
 {
     if( k == groups[j] )
     {
-        cout << groups[j];
-
-        yuneFile << "o " << "MeshID:" << endl << "matID" << endl << endl;
+        yuneFile << "o " << "MeshID:" << meshIDs[m] << endl << "matID" << endl << endl;
         j += 2;
+        m++;
     }
 
     yuneFile << "f" << endl;
@@ -214,6 +227,7 @@ for( int k = 0 ; k < faceCount ; k++ )
 }
 
 yuneFile.close();
+
 /*
 while(k != faceCount){
 if (k == groups[j+1])
