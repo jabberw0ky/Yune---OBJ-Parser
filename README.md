@@ -13,5 +13,5 @@ Use Yune-OBJ-Parser to convert .OBJ files to .rtt format which is supported by t
 * Extract the parser.
 * Place the desired .OBJ file into the 'imports' folder.
 * Run the parser and type in the name of the file.
-* Wait until the parser tell you of the completion of conversion.
+* Wait for the parser to finish conversion.
 * Recover the converted file from the exports folder.
